@@ -47,7 +47,8 @@
     "command": "bash \"$HOME/.claude/statusline.sh\""
   },
   "enabledPlugins": {
-    "skill-creator@claude-plugins-official": false
+    "skill-creator@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "understand-anything": {
@@ -57,7 +58,7 @@
       }
     }
   },
+  "effortLevel": "high",
   "theme": "dark-daltonized",
-  "autoCompactEnabled": true,
-  "effortLevel": "xhigh"
+  "autoCompactEnabled": true
 }
