@@ -1,0 +1,7 @@
+# Normalize line endings: store as LF in git, and check out as LF everywhere
+# (including Windows). This keeps shell scripts (install.sh, hooks/*.sh)
+# runnable after a clone — a CRLF in a #!/usr/bin/env bash script breaks it.
+* text=auto eol=lf
+
+# Be explicit for the files that actually break with CRLF.
+*.sh text eol=lf
