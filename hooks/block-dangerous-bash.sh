@@ -26,6 +26,14 @@ S='(^|[[:space:];&|(`])'
 echo "$cmd" | grep -Eq "${S}rm([[:space:]]+[^[:space:]]+)*[[:space:]]+(-[[:alnum:]]*[rRf][[:alnum:]]*|--recursive|--force)" \
   && deny "rm -r/-f"
 
+# --- Delete via find: -delete, or -exec/-execdir rm (same destruction, diff binary) ---
+# Token-anchored like the rm rule above: a path/expr like ./my-delete-file is one
+# token and never matches the standalone "-delete" / "rm" flag tokens we look for.
+echo "$cmd" | grep -Eq "${S}find([[:space:]]+[^[:space:]]+)*[[:space:]]+-delete([[:space:]]|$)" \
+  && deny "find -delete"
+echo "$cmd" | grep -Eq "${S}find([[:space:]]+[^[:space:]]+)*[[:space:]]+-exec(dir)?[[:space:]]+rm([[:space:]]|$)" \
+  && deny "find -exec rm"
+
 # --- Highest privileges ---
 echo "$cmd" | grep -Eq "${S}sudo([[:space:]]|$)" && deny "sudo"
 
